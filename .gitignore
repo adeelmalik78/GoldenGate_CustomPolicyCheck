@@ -1,0 +1,6 @@
+**/*liquibase.properties
+DBScripts/**
+.DS_Store
+.idea/
+**.pdf
+.liquibase

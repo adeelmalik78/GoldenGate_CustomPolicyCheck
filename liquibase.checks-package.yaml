@@ -1,0 +1,52 @@
+## This is a Liquibase checks packages formatted yaml file.
+## It contains just one or more 'checksPackages' objects
+## with one or more named checks-settings-files.
+
+## These checks-settings-files listed in a package are processed sequentially
+## during 'liquibase checks run' or 'liquibase checks show' commands
+## which specify this file as the checks-settings-file property.
+
+## Learn more at https://docs.liquibase.com/policy-checks
+
+#### This checks package file "liquibase.checks-package.yaml"
+#### contains 6 theme packages and 2 composite packages.
+
+## Example: run ALL packages:
+####  liquibase checks run --checks-settings-file=liquibase.checks-package.yaml
+
+## Example: run a specific package:
+#### liquibase checks run --checks-settings-file=liquibase.checks-package.yaml --checks-packages=auth-and-access.pkg
+## or
+#### liquibase checks run --checks-settings-file=liquibase.checks-package.yaml --checks-packages=data-protection.pkg
+## or
+#### liquibase checks run --checks-settings-file=liquibase.checks-package.yaml --checks-packages=security.pkg
+
+#### The list of checksPackages
+
+checksPackages:
+- name: auth-and-access.pkg
+  files:
+  - checks-packages/liquibase.checks.auth-and-access.yaml
+- name: data-protection.pkg
+  files:
+  - checks-packages/liquibase.checks.data-protection.yaml
+- name: database-compatibility.pkg
+  files:
+  - checks-packages/liquibase.checks.database-compatibility.yaml
+- name: metadata-content.pkg
+  files:
+  - checks-packages/liquibase.checks.metadata-content.yaml
+- name: scripting-standards.pkg
+  files:
+  - checks-packages/liquibase.checks.scripting-standards.yaml
+- name: sensitive-data-pii.pkg
+  files:
+  - checks-packages/liquibase.checks.sensitive-data-pii.yaml
+- name: coding-standards.pkg
+  files:
+  - checks-packages/liquibase.checks.metadata-content.yaml
+  - checks-packages/liquibase.checks.scripting-standards.yaml
+- name: security.pkg
+  files:
+  - checks-packages/liquibase.checks.auth-and-access.yaml
+  - checks-packages/liquibase.checks.data-protection.yaml
