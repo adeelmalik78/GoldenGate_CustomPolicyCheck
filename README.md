@@ -19,7 +19,7 @@ A [GGTables.txt](GGTables.txt) file contains a list of tables that are replicate
     checks-scripts-enabled=true
     ```
 
-# 📒 Notes
+# Configuring Python Policy Checks
 1. To aid in debugging, it's useful to disable all other policy checks.
     ```
     % liquibase checks bulk-set --disable
@@ -40,7 +40,44 @@ A [GGTables.txt](GGTables.txt) file contains a list of tables that are replicate
 |Script Args|`<blank>`|
 |Requires Snapshot|`false`|
 
+# Running the check
+In you CICD pipeline, you will run the following command:
+    `liquibase checks run`
 
+This is what policy checks will detect when it encounters SQL making changes to tables that are mentioned in `GGTables.txt`.
+```
+Checks-settings File:      liquibase.checks-settings.conf
+=========================================================
+CHANGELOG CHECKS
+----------------
+Checks completed validation of the changelog and found the following issues:
+
+Check Name:         Custom Check Template (CheckGoldenGateTables)
+Changeset ID:       addressses_pk
+Changeset Filepath: changelog.sql
+Check Severity:     MINOR (Return code: 1)
+Message:            ALTER TABLE: "ADDRESSES" appears in GGTables.txt - This is a GoldenGate-replicated table.
+
+Check Name:         Custom Check Template (CheckGoldenGateTables)
+Changeset ID:       orgs_index_industry
+Changeset Filepath: changelog.sql
+Check Severity:     MINOR (Return code: 1)
+Message:            CREATE INDEX: "ORGANIZATIONS" appears in GGTables.txt - This is a GoldenGate-replicated table.
+
+Check Name:         Custom Check Template (CheckGoldenGateTables)
+Changeset ID:       orgs_index_name
+Changeset Filepath: changelog.sql
+Check Severity:     MINOR (Return code: 1)
+Message:            CREATE INDEX: "ORGANIZATIONS" appears in GGTables.txt - This is a GoldenGate-replicated table.
+
+Check Name:         Custom Check Template (CheckGoldenGateTables)
+Changeset ID:       orgs_rank
+Changeset Filepath: changelog.sql
+Check Severity:     MINOR (Return code: 1)
+Message:            ALTER TABLE: "ORGANIZATIONS" appears in GGTables.txt - This is a GoldenGate-replicated table.
+```
+
+# 📒 Notes
 1. Scripts are called once for each changeset (changelog scope) or once for each database object (database scope). Changesets may contain multiple SQL statements.
 1. The print() function can be used to display debugging messages (instead of just liquibase_logger). This works regardless of log_level. Additionally, f strings automatically convert variables for printing and remove the need for concatenation to build a string of static and dynamic text.
     ```

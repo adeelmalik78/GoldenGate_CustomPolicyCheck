@@ -60,7 +60,7 @@ for change in changes:
         index_table = [token.lower() for token in sql_list].index("table")
         if index_table + 1 < len(sql_list):
             table_name = sql_list[index_table + 1]
-            print(f"DROP: Table name: {table_name}")
+            # print(f"DROP: Table name: {table_name}")
             if table_name.upper() in GGTables.upper():
                 liquibase_status.fired = True
                 status_message = f"DROP TABLE: \"{table_name}\" appears in GGTables.txt - This is a GoldenGate-replicated table."
@@ -74,7 +74,7 @@ for change in changes:
         index_table = [token.lower() for token in sql_list].index("index")
         if index_table + 3 < len(sql_list):
             table_name = sql_list[index_table + 3].split('(')[0]
-            print(f"CREATE INDEX: Table name: {table_name}")
+            # print(f"CREATE INDEX: Table name: {table_name}")
             if table_name.upper() in GGTables.upper():
                 liquibase_status.fired = True
                 status_message = f"CREATE INDEX: \"{table_name}\" appears in GGTables.txt - This is a GoldenGate-replicated table."
