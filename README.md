@@ -1,4 +1,4 @@
-# Liquibase Secure Python Policy Checks - for detecting changes to GoldenGate-replicated Tables
+# Python Policy Checks for detecting changes to GoldenGate-replicated tables
 This repository shows Python Policy Check for detecting changes to tables (ALTER | DROP | CREATE INDEX) that are being replicated in GoldenGate. 
 
 A sample changelog, [changelog.sql](changelog.sql), is provided to show various DDL changes applied to multiple tables in the database.
