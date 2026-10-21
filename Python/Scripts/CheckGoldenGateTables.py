@@ -43,7 +43,7 @@ for change in changes:
     ### This handles most ALTER TABLE statements including ADD COLUMN, DROP COLUMN, MODIFY COLUMN, PRIMARY KEY, FOREIGN KEY
     ###
     if "alter" in map(str.casefold, sql_list) and "table" in map(str.casefold, sql_list):
-        index_table = [token.lower() for token in sql_list].index("table")
+        index_table = [token.upper() for token in sql_list].index("TABLE")
         if index_table + 1 < len(sql_list):
             table_name = sql_list[index_table + 1]
             # print(f"ALTER: Table name: {table_name}")
@@ -57,7 +57,7 @@ for change in changes:
     ### Locate "drop table" in list
     ###
     if "drop" in map(str.casefold, sql_list) and "table" in map(str.casefold, sql_list):
-        index_table = [token.lower() for token in sql_list].index("table")
+        index_table = [token.upper() for token in sql_list].index("TABLE")
         if index_table + 1 < len(sql_list):
             table_name = sql_list[index_table + 1]
             # print(f"DROP: Table name: {table_name}")
@@ -71,7 +71,7 @@ for change in changes:
     ### Locate "create index XXX on ..." in list
     ###
     if "create" in map(str.casefold, sql_list) and "index" in map(str.casefold, sql_list):
-        index_table = [token.lower() for token in sql_list].index("index")
+        index_table = [token.upper() for token in sql_list].index("INDEX")
         if index_table + 3 < len(sql_list):
             table_name = sql_list[index_table + 3].split('(')[0]
             # print(f"CREATE INDEX: Table name: {table_name}")
